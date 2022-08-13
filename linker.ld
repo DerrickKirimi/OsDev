@@ -1,10 +1,10 @@
-ENTRY(linker)
+ENTRY(loader)
 OUTPUT_FORMAT(elf32-i386)
 OUTPUT_ARCH(i386:i386)
 
 SECTIONS
 {
- . = 0X01000000;
+ . = 0X0100000;
  .text :
  {
 	*(.multiboot)
@@ -15,7 +15,7 @@ SECTIONS
  {
 	start_ctors = .;
 	KEEP(*( .init_array));
-	KEEP(*(SORT_BY_PRIORITY{ .init_array.*}))
+	KEEP(*(SORT_BY_PRIORITY( .init_array.*)))
 	end_ctors = .;
 	*(.data)
  }
